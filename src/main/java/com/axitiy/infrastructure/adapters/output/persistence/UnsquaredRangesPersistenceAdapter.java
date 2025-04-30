@@ -1,0 +1,59 @@
+package com.axitiy.infrastructure.adapters.output.persistence;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import com.axitiy.application.ports.output.UnsquaredRangesOutputPort;
+import com.axitiy.domain.model.UnsquaredRanges;
+import com.axitiy.infrastructure.adapters.output.persistence.entity.UnsquaredRangesEntity;
+import com.axitiy.infrastructure.adapters.output.persistence.mapper.UnsquaredRangesMapper;
+import com.axitiy.infrastructure.adapters.output.persistence.repository.UnsquaredRangesRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class UnsquaredRangesPersistenceAdapter implements UnsquaredRangesOutputPort {
+
+    private final UnsquaredRangesRepository unsquaredRangesRepository = null;
+
+    private final UnsquaredRangesMapper unsquaredRangesMapper = new UnsquaredRangesMapper();
+    
+    public UnsquaredRangesPersistenceAdapter(UnsquaredRangesRepository unsquaredRangesRepository2,
+			UnsquaredRangesMapper unsquaredRangesMapper2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+    public UnsquaredRanges saveUnsquaredRanges(UnsquaredRanges unsquaredRanges) {
+    	UnsquaredRangesEntity unsquaredRangesEntity = unsquaredRangesMapper.toEntity(unsquaredRanges);
+    	unsquaredRangesRepository.save(unsquaredRangesEntity);
+        return unsquaredRangesMapper.toUnsquaredRanges(unsquaredRangesEntity);
+    }
+
+    @Override
+    public Optional<UnsquaredRanges> getUnsquaredRangesById(Long id) {
+        Optional<UnsquaredRangesEntity> unsquaredRangesEntity = unsquaredRangesRepository.findById(id);
+
+        if(unsquaredRangesEntity.isEmpty()) {
+            return Optional.empty();
+        }
+
+        UnsquaredRanges unsquaredRanges = unsquaredRangesMapper.toUnsquaredRanges(unsquaredRangesEntity.get());
+        return Optional.of(unsquaredRanges);
+    }
+    
+    @Override
+    public List<UnsquaredRanges> getUnsquaredRangesByFilters(Date afearax, int asidsucax, int apidprax) {
+    	List<UnsquaredRanges> unsquaredRanges = unsquaredRangesRepository.findByUnsquaredRanges(afearax, asidsucax, apidprax);
+    	
+    	/*List<UnsquaredRangesEntity> unsquaredRangesEntity = unsquaredRangesMapper.toListUnsquaredRangesEntity(unsquaredRanges);
+
+        if(unsquaredRangesEntity.isEmpty()) {
+            return Optional.empty();
+        }*/
+
+        return unsquaredRanges;
+    }
+    
+}
