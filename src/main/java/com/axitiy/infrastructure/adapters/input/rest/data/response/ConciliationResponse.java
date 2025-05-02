@@ -20,7 +20,7 @@ public class ConciliationResponse {
     
     private String aresax;
     
-    public ConciliationResponse(int aid, Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax) {
+    /*public ConciliationResponse(int aid, Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax) {
         this.aid = aid;
         this.afearax = afearax;
         this.asidsucax = asidsucax;
@@ -29,7 +29,7 @@ public class ConciliationResponse {
         this.adifax = adifax;
         this.asfarax = asfarax;
         this.aresax = aresax;
-    }
+    }*/
 
     public int getId_Conciliation() {
         return aid;

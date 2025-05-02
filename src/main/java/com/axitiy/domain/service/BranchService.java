@@ -1,29 +1,29 @@
 package com.axitiy.domain.service;
 
-import com.axitiy.application.ports.input.CreateBranchUseCase;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import com.axitiy.application.ports.input.GetBranchUseCase;
 import com.axitiy.application.ports.output.BranchOutputPort;
-import com.axitiy.domain.exception.BranchNotFoundException;
 import com.axitiy.domain.model.Branch;
 
 import lombok.AllArgsConstructor;
 
+@Component("beanName1")
 @AllArgsConstructor
-public class BranchService implements CreateBranchUseCase, GetBranchUseCase{
+public class BranchService implements GetBranchUseCase{
 
-    private final BranchOutputPort branchOutputPort = null;
+	@Autowired
+	@Qualifier("beanName2")
+    BranchOutputPort branchOutputPort;
     
     @Override
-    public Branch getBranchById(Long id) {
-        System.out.println("Retornando Sucursal por ID");
-        return branchOutputPort.getBranchById(id)
-                                .orElseThrow(() -> new BranchNotFoundException("No se encontro el sucursal con ID: " + id));
+    public List<Branch> getAll() {
+        System.out.println("Retornando lista de Sucursales");
+        return branchOutputPort.getAll();
     }
 
-    @Override
-    public Branch createBranch(Branch branch) {
-        System.out.println("Creando Sucursal");
-        return branchOutputPort.saveBranch(branch);
-    }
-    
 }

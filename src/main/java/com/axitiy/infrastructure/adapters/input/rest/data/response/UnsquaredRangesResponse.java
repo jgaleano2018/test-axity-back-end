@@ -35,7 +35,7 @@ public class UnsquaredRangesResponse {
 	private String dresax;
 	
 	
-	public UnsquaredRangesResponse(int id, String danoax, String dmesax, String dconax, int dsidsucax, String dcodsucax, String dnomsucax, int dpidprax, String dcoprax, int ddiddoax, String dcodoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
+	/*public UnsquaredRangesResponse(int id, String danoax, String dmesax, String dconax, int dsidsucax, String dcodsucax, String dnomsucax, int dpidprax, String dcoprax, int ddiddoax, String dcodoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
         this.id = id;
         this.danoax = danoax;
         this.dmesax = dmesax;
@@ -51,7 +51,7 @@ public class UnsquaredRangesResponse {
         this.ddifax = ddifax;
         this.dsfarax = dsfarax;
         this.dresax = dresax;
-    }
+    }*/
 
     public int getId_UnsquaredRanges() {
         return id;

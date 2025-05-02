@@ -1,8 +1,8 @@
-package com.axitiy.domain.model;
+package com.axitiy.infrastructure.adapters.input.rest.data.response;
 
-public class BranchProduct {
-
-    private int scid;
+public class BranchProductResponse {
+	
+	private int scid;
 
     private int scidsucax;
 
@@ -10,12 +10,6 @@ public class BranchProduct {
     
     private int sciddoax;
     
-    
-    /*public BranchProduct(int scidsucax, int scidprax, int sciddoax) {
-        this.scidsucax = scidsucax;
-        this.scidprax = scidprax;
-        this.sciddoax = sciddoax;
-    }*/
 
     public int getId_BranchProduct() {
         return scid;
@@ -48,5 +42,6 @@ public class BranchProduct {
     public void setSciddoax(int sciddoax) {
         this.sciddoax = sciddoax;
     }
+
 
 }

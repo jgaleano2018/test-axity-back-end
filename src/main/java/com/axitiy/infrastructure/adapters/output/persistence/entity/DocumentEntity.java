@@ -20,10 +20,10 @@ public class DocumentEntity {
     private String dnomdoax;
     
     
-    public DocumentEntity(String dcoddoax, String dnomdoax) {
+    /*public DocumentEntity(String dcoddoax, String dnomdoax) {
         this.dcoddoax = dcoddoax;
         this.dnomdoax = dnomdoax;
-    }
+    }*/
 
     public int getId_Document() {
         return diddoax;

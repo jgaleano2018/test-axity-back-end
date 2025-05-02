@@ -2,6 +2,8 @@ package com.axitiy.infrastructure.adapters.output.persistence;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.axitiy.application.ports.output.ConciliationOutputPort;
 import com.axitiy.domain.model.Conciliation;
 import com.axitiy.infrastructure.adapters.output.persistence.entity.ConciliationEntity;
@@ -13,7 +15,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ConciliationPersistenceAdapter implements ConciliationOutputPort {
 
-    private final ConciliationRepository conciliationRepository = null;
+	@Autowired
+	ConciliationRepository conciliationRepository;
 
     private final ConciliationMapper conciliationMapper = new ConciliationMapper();
     

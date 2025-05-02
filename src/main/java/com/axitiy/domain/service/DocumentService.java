@@ -1,29 +1,26 @@
 package com.axitiy.domain.service;
 
-import com.axitiy.application.ports.input.CreateDocumentUseCase;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import com.axitiy.application.ports.input.GetDocumentUseCase;
 import com.axitiy.application.ports.output.DocumentOutputPort;
-import com.axitiy.domain.exception.DocumentNotFoundException;
 import com.axitiy.domain.model.Document;
 
-import lombok.AllArgsConstructor;
+@Component("beanName5")
+public class DocumentService implements GetDocumentUseCase{
 
-@AllArgsConstructor
-public class DocumentService implements CreateDocumentUseCase, GetDocumentUseCase{
-
-    private final DocumentOutputPort documentOutputPort = null;
+	@Autowired
+	@Qualifier("beanName6")
+    DocumentOutputPort documentOutputPort;
     
-    @Override
-    public Document getDocumentById(Long id) {
-        System.out.println("Retornando Dcoumento por ID");
-        return documentOutputPort.getDocumentById(id)
-                                .orElseThrow(() -> new DocumentNotFoundException("No se encontro el documento con ID: " + id));
-    }
-
-    @Override
-    public Document createDocument(Document document) {
-        System.out.println("Creando Documento");
-        return documentOutputPort.saveDocument(document);
+	@Override
+    public List<Document> getAll() {
+        System.out.println("Retornando lista de Documentos");
+        return documentOutputPort.getAll();
     }
     
 }

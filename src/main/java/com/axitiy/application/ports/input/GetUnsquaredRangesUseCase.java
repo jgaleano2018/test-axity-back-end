@@ -4,11 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import com.axitiy.domain.model.UnsquaredRanges;
+import com.axitiy.domain.model.UnsquaredRangesReport;
 
 public interface GetUnsquaredRangesUseCase {
    
 	UnsquaredRanges getUnsquaredRangesById(Long id);
 	
-	List<UnsquaredRanges> getUnsquaredRangesByFilters(Date afearax, int asidsucax, int apidprax);
+	List<UnsquaredRangesReport> getUnsquaredRangesByFilters(String afearax_year, String afearax_month, String afearax_day, int asidsucax, int apidprax);
     
 }

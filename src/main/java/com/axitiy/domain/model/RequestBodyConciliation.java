@@ -38,8 +38,8 @@ public class RequestBodyConciliation {
         return monthConciliationRequest;
     }
     
-    public void setMonthConciliationRequest(String yearConciliationRequest) {
-        this.yearConciliationRequest = yearConciliationRequest;
+    public void setMonthConciliationRequest(String monthConciliationRequest) {
+        this.monthConciliationRequest = monthConciliationRequest;
     }
     
     

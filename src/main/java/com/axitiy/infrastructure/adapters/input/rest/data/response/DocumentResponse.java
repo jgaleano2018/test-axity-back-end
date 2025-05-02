@@ -9,11 +9,11 @@ public class DocumentResponse {
     private String dnomdoax;
     
     
-    public DocumentResponse(int diddoax, String dcoddoax, String dnomdoax) {
+    /*public DocumentResponse(int diddoax, String dcoddoax, String dnomdoax) {
         this.diddoax = diddoax;
         this.dcoddoax = dcoddoax;
         this.dnomdoax = dnomdoax;
-    }
+    }*/
 
     public int getId_Document() {
         return diddoax;

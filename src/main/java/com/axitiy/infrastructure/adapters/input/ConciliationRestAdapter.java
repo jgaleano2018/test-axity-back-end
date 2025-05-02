@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,9 @@ import com.axitiy.domain.model.BranchProduct;
 import com.axitiy.domain.model.Conciliation;
 import com.axitiy.domain.model.RequestBodyConciliation;
 import com.axitiy.domain.model.UnsquaredRanges;
-import com.axitiy.infrastructure.adapters.input.rest.data.request.ConciliationRequest;
 import com.axitiy.infrastructure.adapters.input.rest.data.request.UnsquaredRangesRequest;
 import com.axitiy.infrastructure.adapters.input.rest.data.response.ConciliationResponse;
+import com.axitiy.infrastructure.adapters.input.rest.data.request.ConciliationRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,25 +32,25 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/Conciliation")
 @RequiredArgsConstructor
 public class ConciliationRestAdapter {
-    
-    private final CreateConciliationUseCase createConciliationUseCase = null;
-    private final CreateUnsquaredRangesUseCase createUnsquaredRangesUseCase = null;
-    private final CreateBranchProductUseCase createBranchProductUseCase = null; 
 
-    //private final GetConciliationUseCase getConciliationUseCase;
+
+	@Autowired
+    CreateConciliationUseCase createConciliationUseCase;
+	
+	@Autowired
+    CreateUnsquaredRangesUseCase createUnsquaredRangesUseCase;
+	
+	@Autowired(required = false)
+    CreateBranchProductUseCase createBranchProductUseCase; 
+
 
     private final ModelMapper mapper = new ModelMapper();
+    
+    @CrossOrigin(origins = "http://localhost:4200")
 
     @PostMapping(value = "/createConciliation")
     public ResponseEntity<?> createConciliation(@RequestBody RequestBodyConciliation entryConciliationData){
 
-    /*public ResponseEntity<?> createConciliation(/*@RequestBody List<BranchRequest> branchToCreate,
-    															   @RequestBody List<DocumentRequest> documentToCreate,
-    															   @RequestBody List<ProductRequest> productToCreate,*//*
-    															   @RequestBody List<ConciliationRequest> conciliationToCreate,
-    															   @RequestBody UnsquaredRangesRequest unsquaredRangesToCreate,
-    															   @RequestBody String monthConciliationRequest,
-    															   @RequestBody String yearConciliationRequest){*/
     	try {
     		
     		List<ConciliationRequest> conciliationToCreate = entryConciliationData.getConciliationToCreate();
@@ -60,35 +62,23 @@ public class ConciliationRestAdapter {
 	    	int regsConciliation = 0;    	
 	    	LocalDate currentDate = LocalDate.now();
 	    	
-	    	System.out.println("Curren Date::: " + currentDate);
-	
 		    // Get day from date
 		    int dayActually = currentDate.getDayOfMonth();
 		    
-		    System.out.println("Day Actually::: " + dayActually);
-		   
 	    	String dayActuallyStr = Integer.toString(dayActually).length() == 1 ? '0'+Integer.toString(dayActually) : Integer.toString(dayActually);
-	    	
-	    	System.out.println("Day Actually Res::: " + dayActuallyStr);
 	    	
 	    	
 	    	for (ConciliationRequest conciliationRequestItem : conciliationToCreate) {
 	    		
 	    		regsConciliation = 0;
 	
-	    		Conciliation conciliation = mapper.map(conciliationRequestItem, Conciliation.class);
+	    		Conciliation conciliation = mapper.map(conciliationRequestItem, Conciliation.class);	    		
 	    		conciliation = createConciliationUseCase.createConciliation(conciliation);
 	    		
-	    		System.out.println("Before insert conciliation data into DB....");
 	    		
 	    		if (regsConciliation == 0) {
 	    			
-	    			System.out.println("It is in this block 1");
-	    			
 	    			regsConciliation = this.loadConciliation(conciliation, monthConciliationRequest, yearConciliationRequest, dayActuallyStr);
-	    			
-	    			
-	    			System.out.println("Result RegsConc::: " + regsConciliation);
 	    			
 	    		}
 	    		
@@ -97,7 +87,14 @@ public class ConciliationRestAdapter {
 	    			//Insert register in the table: branch_product
 	    			
 	    			// Request to domain
-	            	BranchProduct branchProduct = new BranchProduct(conciliation.getAsidsucax(), conciliation.getApidprax(), conciliation.getAdiddoax());
+	            	//BranchProduct branchProduct = new BranchProduct(conciliation.getAsidsucax(), conciliation.getApidprax(), conciliation.getAdiddoax());
+	            	
+	            	BranchProduct branchProduct = new BranchProduct();
+	            	
+	            	branchProduct.setScidsucax(conciliation.getAsidsucax());
+	            	branchProduct.setScidprax(conciliation.getApidprax());
+	            	branchProduct.setSciddoax(conciliation.getAdiddoax());	            	
+	            	
 	            	branchProduct = createBranchProductUseCase.createBranchProduct(branchProduct);
 	    			
 	    		}
@@ -128,13 +125,6 @@ public class ConciliationRestAdapter {
         
     }
 
-    /*@GetMapping(value = "/products/{id}")
-    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id){
-        Product product = getProductUseCase.getProductById(id);
-        // Domain to response
-        return new ResponseEntity<>(mapper.map(product, ProductResponse.class), HttpStatus.OK);
-    }*/
-
 	public int loadConciliation(Conciliation conciliation, String monthFilter, String yearFilter, String dayActuallyStr) {
 
     	int regsConciliation = 0;
@@ -152,25 +142,20 @@ public class ConciliationRestAdapter {
     		String yearAraxStr = Integer.toString(yearArax);
     		
     		
-    		System.out.println("Result monthAraxStr::: " + monthAraxStr);
-    		System.out.println("Result monthFilter::: " + monthFilter);
-    		System.out.println("Result yearAraxStr::: " + yearAraxStr);
-    		System.out.println("Result yearFilter::: " + yearFilter);
-    		
-    		System.out.println(conciliation);
+    		if (conciliation.getAresax() == "D") {				
+				
+				//Se lee la carga de descuadres
+				this.loadUnsquaredRanges(conciliation, monthAraxStr, yearAraxStr, dayActuallyStr);				
+				
+    		}
     		
     		
     		if (monthAraxStr == monthFilter && yearAraxStr == yearFilter) {
     		
-    			if (conciliation.getAresax() == "D") {
+    			if (conciliation.getAresax() == "D") {    				
     				
-    				
-    				System.out.println("After insert unsquared ranges.....");
-    			
     				//Se lee la carga de descuadres
-    				this.loadUnsquaredRanges(conciliation, monthAraxStr, yearAraxStr, dayActuallyStr);
-    				
-    				System.out.println("Before insert unsquared ranges.....");
+    				this.loadUnsquaredRanges(conciliation, monthAraxStr, yearAraxStr, dayActuallyStr);    				
     			
     			}
     			else {
@@ -201,7 +186,6 @@ public class ConciliationRestAdapter {
     	
         try {
             
-        	
         	// Request to domain
         	UnsquaredRanges unsquaredRanges = new UnsquaredRanges(yearFilter, monthFilter, dayActuallyStr, conciliation.getAsidsucax(), conciliation.getApidprax(), conciliation.getAdiddoax(), conciliation.getAfearax(), conciliation.getAdifax(), conciliation.getAsfarax(), conciliation.getAresax());
         	unsquaredRanges = createUnsquaredRangesUseCase.createUnsquaredRanges(unsquaredRanges);

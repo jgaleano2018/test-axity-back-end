@@ -9,10 +9,10 @@ public class Branch {
     private String snomsucax;
     
     
-    public Branch(String scodsucax, String snomsucax) {
+    /*public Branch(String scodsucax, String snomsucax) {
         this.scodsucax = scodsucax;
         this.snomsucax = snomsucax;
-    }
+    }*/
 
     public int getId_Branch() {
         return sidsucax;

@@ -9,10 +9,10 @@ public class Product {
     private String pnomprax;
     
     
-    public Product(String pcodprax, String pnomprax) {
+    /*public Product(String pcodprax, String pnomprax) {
         this.pcodprax = pcodprax;
         this.pnomprax = pnomprax;
-    }
+    }*/
 
     public int getId_Product() {
         return pidprax;

@@ -4,16 +4,14 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.axitiy.domain.model.Conciliation;
 import com.axitiy.infrastructure.adapters.output.persistence.entity.ConciliationEntity;
 
 
 public class ConciliationMapper {
-
-    @Autowired
-    private ModelMapper mapper;
+	
+	private final ModelMapper mapper = new ModelMapper();
 
     public Conciliation toConciliation(ConciliationEntity entity){
         return mapper.map(entity, Conciliation.class);

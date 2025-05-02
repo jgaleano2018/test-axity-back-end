@@ -19,10 +19,10 @@ public class ProductEntity {
     private String pnomprax;
     
     
-    public ProductEntity(String pcodprax, String pnomprax) {
+    /*public ProductEntity(String pcodprax, String pnomprax) {
         this.pcodprax = pcodprax;
         this.pnomprax = pnomprax;
-    }
+    }*/
 
     public int getId_Product() {
         return pidprax;

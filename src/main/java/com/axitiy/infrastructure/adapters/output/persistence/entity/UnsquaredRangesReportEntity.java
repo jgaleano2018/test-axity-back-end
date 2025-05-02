@@ -9,12 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "unsquared_ranges")
-public class UnsquaredRangesEntity {
+@Table(name = "unsquared_ranges_report")
+public class UnsquaredRangesReportEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)  
-    private int id;
+	private int id;
 
     private String danoax;
 
@@ -24,9 +24,21 @@ public class UnsquaredRangesEntity {
 
     private int dsidsucax;
     
+    private String scodsucax;
+    
+    private String snomsucax;
+    
     private int dpidprax;
     
+    private String pcodprax;
+    
+    private String pnomprax;
+    
     private int ddiddoax;
+    
+    private String dcoddoax;
+    
+    private String dnomdoax;
     
     private Date dfearax;
     
@@ -36,19 +48,7 @@ public class UnsquaredRangesEntity {
     
     private String dresax;
     
-    /*public UnsquaredRangesEntity(String danoax, String dmesax, String dconax, int dsidsucax, int dpidprax, int ddiddoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
-        this.danoax = danoax;
-        this.dmesax = dmesax;
-        this.dconax = dconax;
-        this.dsidsucax = dsidsucax;
-        this.dpidprax = dpidprax;
-        this.ddiddoax = ddiddoax;
-        this.dfearax = dfearax;
-        this.ddifax = ddifax;
-        this.dsfarax = dsfarax;
-        this.dresax = dresax;
-    }*/
-
+    
     public int getId_UnsquaredRanges() {
         return id;
     }
@@ -89,12 +89,44 @@ public class UnsquaredRangesEntity {
         this.dsidsucax = dsidsucax;
     }
     
+    public String getDscodsucax() {
+        return scodsucax;
+    }
+    
+    public void setDscodsucax(String scodsucax) {
+        this.scodsucax = scodsucax;
+    }
+    
+    public String getDsnomsucax() {
+        return snomsucax;
+    }
+    
+    public void setDsnomsucax(String snomsucax) {
+        this.snomsucax = snomsucax;
+    }
+    
     public int getDpidprax() {
         return dpidprax;
     }
     
     public void setDpidprax(int dpidprax) {
         this.dpidprax = dpidprax;
+    }
+    
+    public String getDpcodprax() {
+        return pcodprax;
+    }
+    
+    public void setDpcodprax(String pcodprax) {
+        this.pcodprax = pcodprax;
+    }
+    
+    public String getDpnomprax() {
+        return pnomprax;
+    }
+    
+    public void setDpnomprax(String pnomprax) {
+        this.pnomprax = pnomprax;
     }
     
     public int getDdiddoax() {
@@ -105,6 +137,21 @@ public class UnsquaredRangesEntity {
         this.ddiddoax = ddiddoax;
     }
 
+    public String getDdcoddoax() {
+        return dcoddoax;
+    }
+    
+    public void setDdcoddoax(String dcoddoax) {
+        this.dcoddoax = dcoddoax;
+    }
+    
+    public String getDdnomdoax() {
+        return dnomdoax;
+    }
+    
+    public void setDdnomdoax(String dnomdoax) {
+        this.dnomdoax = dnomdoax;
+    }
 
     public Date getDfearax() {
         return dfearax;
@@ -137,4 +184,5 @@ public class UnsquaredRangesEntity {
     public void setDresax(String dresax) {
         this.dresax = dresax;
     }
+    
 }

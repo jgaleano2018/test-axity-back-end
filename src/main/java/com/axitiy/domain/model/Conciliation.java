@@ -21,7 +21,7 @@ public class Conciliation {
     private String aresax;
     
     
-    public Conciliation(Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax) {
+    /*public Conciliation(Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax) {
         this.afearax = afearax;
         this.asidsucax = asidsucax;
         this.apidprax = apidprax;
@@ -29,7 +29,7 @@ public class Conciliation {
         this.adifax = adifax;
         this.asfarax = asfarax;
         this.aresax = aresax;
-    }
+    }*/
 
     public int getId_Conciliation() {
         return aid;

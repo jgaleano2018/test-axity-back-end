@@ -9,10 +9,10 @@ public class Document {
     private String dnomdoax;
     
     
-    public Document(String dcoddoax, String dnomdoax) {
+    /*public Document(String dcoddoax, String dnomdoax) {
         this.dcoddoax = dcoddoax;
         this.dnomdoax = dnomdoax;
-    }
+    }*/
 
     public int getId_Document() {
         return diddoax;
@@ -37,6 +37,5 @@ public class Document {
     public void setDnomdoax(String dnomdoax) {
         this.dnomdoax = dnomdoax;
     }
-
 
 }

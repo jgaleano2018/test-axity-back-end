@@ -7,9 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Builder;
+//import lombok.Builder;
 
-@Builder
+//@Builder
 @Entity
 @Table(name = "conciliation")
 public class ConciliationEntity {
@@ -32,8 +32,7 @@ public class ConciliationEntity {
     
     private String aresax;
     
-    
-    public ConciliationEntity(Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax) {
+    /*public ConciliationEntity(Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax) {
         this.afearax = afearax;
         this.asidsucax = asidsucax;
         this.apidprax = apidprax;
@@ -41,7 +40,7 @@ public class ConciliationEntity {
         this.adifax = adifax;
         this.asfarax = asfarax;
         this.aresax = aresax;
-    }
+    }*/
 
     public int getId_Conciliation() {
         return aid;

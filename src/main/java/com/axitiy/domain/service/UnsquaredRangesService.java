@@ -1,13 +1,15 @@
 package com.axitiy.domain.service;
 
-import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.axitiy.application.ports.input.CreateUnsquaredRangesUseCase;
 import com.axitiy.application.ports.input.GetUnsquaredRangesUseCase;
 import com.axitiy.application.ports.output.UnsquaredRangesOutputPort;
 import com.axitiy.domain.exception.UnsquaredRangesNotFoundException;
 import com.axitiy.domain.model.UnsquaredRanges;
+import com.axitiy.domain.model.UnsquaredRangesReport;
 import com.axitiy.infrastructure.adapters.output.persistence.UnsquaredRangesPersistenceAdapter;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +17,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UnsquaredRangesService implements CreateUnsquaredRangesUseCase, GetUnsquaredRangesUseCase{
 
-    private final UnsquaredRangesOutputPort unsquaredRangesOutputPort = null;
+	@Autowired
+    UnsquaredRangesOutputPort unsquaredRangesOutputPort;
     
     public UnsquaredRangesService(UnsquaredRangesPersistenceAdapter unsquaredRangesPersistenceAdapter) {
 		// TODO Auto-generated constructor stub
@@ -36,8 +39,8 @@ public class UnsquaredRangesService implements CreateUnsquaredRangesUseCase, Get
     
     
     @Override
-    public List<UnsquaredRanges> getUnsquaredRangesByFilters(Date afearax, int asidsucax, int apidprax) {
+    public List<UnsquaredRangesReport> getUnsquaredRangesByFilters(String afearax_year, String afearax_month, String afearax_day, int asidsucax, int apidprax) {
         System.out.println("Retornando descuadres por fecha, sucursal y producto");
-        return unsquaredRangesOutputPort.getUnsquaredRangesByFilters(afearax, asidsucax, apidprax);
+        return unsquaredRangesOutputPort.getUnsquaredRangesByFilters(afearax_year, afearax_month, afearax_day, asidsucax, apidprax);
     }
 }

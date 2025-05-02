@@ -75,13 +75,9 @@ public class ConciliationServiceTest {
 
     @BeforeEach
     public void setup(){
-        //employeeRepository = Mockito.mock(EmployeeRepository.class);
-        //employeeService = new EmployeeServiceImpl(employeeRepository);
-    	
-    	
+        
     	//ConciliationEntity(Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax)
     	//UnsquaredRangesEntity(String danoax, String dmesax, String dconax, int dsidsucax, int dpidprax, int ddiddoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
-    	
     	
     	this.monthConciliationRequest = "01";    	
     	this.yearConciliationRequest = "2025";
@@ -89,35 +85,65 @@ public class ConciliationServiceTest {
     	//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     	Date dateConciliationTest = new Date();
     	
-    	ConciliationEntity conciliationEntity = new ConciliationEntity(dateConciliationTest, 1, 1, 1, 0.00, 3081673400.00, "C");
-    	
     	this.conciliationEntityList = new ArrayList<ConciliationEntity>();
+    	ConciliationEntity conciliationEntity = new ConciliationEntity();
     	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(1);
+    	conciliationEntity.setApidprax(1);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(0.00);
+    	conciliationEntity.setAsfarax(3081673400.00);
+    	conciliationEntity.setAresax("C");
     	conciliationEntityList.add(conciliationEntity);
     	
-    	conciliationEntity = new ConciliationEntity(dateConciliationTest, 1, 2, 1, 0.00, 691624500.00, "C");
-    	
+    	conciliationEntity = new ConciliationEntity();    	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(1);
+    	conciliationEntity.setApidprax(2);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(0.00);
+    	conciliationEntity.setAsfarax(691624500.00);
+    	conciliationEntity.setAresax("C");    	
     	conciliationEntityList.add(conciliationEntity);
     	
-    	conciliationEntity = new ConciliationEntity(dateConciliationTest, 1, 3, 1, 19.50, 2976795600.00, "D");
-    	
+    	conciliationEntity = new ConciliationEntity();    	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(1);
+    	conciliationEntity.setApidprax(3);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(0.00);
+    	conciliationEntity.setAsfarax(2976795600.00);
+    	conciliationEntity.setAresax("D");
     	conciliationEntityList.add(conciliationEntity);
-
-    	conciliationEntity = new ConciliationEntity(dateConciliationTest, 2, 1, 1, 55.00, 422793679, "B");
     	
-    	conciliationEntityList.add(conciliationEntity);
-    	
+    	conciliationEntity = new ConciliationEntity();    	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(2);
+    	conciliationEntity.setApidprax(1);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(55.00);
+    	conciliationEntity.setAsfarax(422793679);
+    	conciliationEntity.setAresax("B");
+    	conciliationEntityList.add(conciliationEntity);    	
     	
     	// Get day from date
     	LocalDate currentDate = LocalDate.now();
 	    int dayActually = currentDate.getDayOfMonth();
     	String dayActuallyStr = Integer.toString(dayActually).length() == 1 ? '0'+Integer.toString(dayActually) : Integer.toString(dayActually);
     	
+    	this.unsquaredRangesEntity = new UnsquaredRangesEntity();
+    	unsquaredRangesEntity.setDanoax(yearConciliationRequest);
+    	unsquaredRangesEntity.setDmesax(monthConciliationRequest);
+    	unsquaredRangesEntity.setDconax(dayActuallyStr);
+    	unsquaredRangesEntity.setDfearax(dateConciliationTest);
+    	unsquaredRangesEntity.setDsidsucax(1);
+    	unsquaredRangesEntity.setDpidprax(3);
+    	unsquaredRangesEntity.setDdifax(19.50);
+    	unsquaredRangesEntity.setDsfarax(2976795600.00);
+    	unsquaredRangesEntity.setDresax("D");
     	
-        this.unsquaredRangesEntity = new UnsquaredRangesEntity(yearConciliationRequest, monthConciliationRequest, dayActuallyStr, 1, 3, 1, dateConciliationTest, 19.50, 2976795600.00, "D");
-        
         this.branchProductEntity = new BranchProductEntity(1, 1, 1);
-
     }
 
     // JUnit test for saveConciliation method
@@ -134,11 +160,7 @@ public class ConciliationServiceTest {
         
         given(conciliationService.createConciliation(listConciliation.get(0))).willReturn(conciliation);
 
-        //System.out.println(employeeRepository);
-        //System.out.println(employeeService);
-
         // when -  action or the behaviour that we are going test
-        //Employee savedEmployee = employeeService.saveEmployee(employee);
         Conciliation conciliation2 = conciliationMapper.toConciliation(conciliationEntity);
 
         //System.out.println(savedEmployee);
@@ -152,7 +174,6 @@ public class ConciliationServiceTest {
     @DisplayName("JUnit test for unsquared ranges method")
     @Test
     public void givenUnsquaredRangesObject_whenSaveUnsquaredRanges_thenReturnUnsquaredRangesObject(){
-    	
     	
         UnsquaredRanges unsquaredRanges = unsquaredRangesMapper.toUnsquaredRanges(unsquaredRangesEntity);
     	
@@ -174,7 +195,6 @@ public class ConciliationServiceTest {
     @DisplayName("JUnit test for branch product method")
     @Test
     public void givenBranchProductObject_whenSaveBranchProduct_thenReturnBranchProductObject(){
-    	
     	
     	com.axitiy.domain.model.BranchProduct branchProduct = branchProductMapper.toBranchProduct(branchProductEntity);
     	

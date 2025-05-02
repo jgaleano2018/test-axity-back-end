@@ -1,17 +1,23 @@
-package com.axitiy.infrastructure.adapters.input.rest.data.request;
-
-import jakarta.validation.constraints.NotEmpty;
+package com.axitiy.infrastructure.adapters.input.rest.data.response;
 
 public class ProductRequest {
-    
-	@NotEmpty(message = "Product Code may not be empty")
-	private String pcodprax;
+	
+	private int pidprax;
 
-	@NotEmpty(message = "Product may not be empty")
+    private String pcodprax;
+
     private String pnomprax;
-	
-	
-	public String getPcodprax() {
+    
+
+    public int getId_Product() {
+        return pidprax;
+    }
+    
+    public void setId_Product(int pidprax) {
+        this.pidprax = pidprax;
+    }
+
+    public String getPcodprax() {
         return pcodprax;
     }
     

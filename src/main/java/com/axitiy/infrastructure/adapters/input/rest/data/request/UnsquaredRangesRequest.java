@@ -36,7 +36,7 @@ public class UnsquaredRangesRequest {
 	@NotEmpty(message = "Conciliation Type may not be empty")
     private String dresax;
 	
-	public UnsquaredRangesRequest(String danoax, String dmesax, String dconax, int dsidsucax, int dpidprax, int ddiddoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
+	/*public UnsquaredRangesRequest(String danoax, String dmesax, String dconax, int dsidsucax, int dpidprax, int ddiddoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
         this.danoax = danoax;
         this.dmesax = dmesax;
         this.dconax = dconax;
@@ -47,7 +47,7 @@ public class UnsquaredRangesRequest {
         this.ddifax = ddifax;
         this.dsfarax = dsfarax;
         this.dresax = dresax;
-    }
+    }*/
 
     public String getDanoax() {
         return danoax;

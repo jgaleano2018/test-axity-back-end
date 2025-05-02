@@ -2,17 +2,6 @@ package com.axitiy.infrastructure.adapters.input.rest.data.request;
 
 import jakarta.validation.constraints.NotEmpty;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Builder
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class BranchRequest {
     
 	@NotEmpty(message = "Branch Code may not be empty")
@@ -20,5 +9,22 @@ public class BranchRequest {
 
 	@NotEmpty(message = "Branch may not be empty")
     private String snomsucax;
+	
+
+    public String getScodsucax() {
+        return scodsucax;
+    }
+    
+    public void setScodsucax(String scodsucax) {
+        this.scodsucax = scodsucax;
+    }
+    
+    public String getSnomsucax() {
+        return snomsucax;
+    }
+    
+    public void setSnomsucax(String snomsucax) {
+        this.snomsucax = snomsucax;
+    }
 
 }

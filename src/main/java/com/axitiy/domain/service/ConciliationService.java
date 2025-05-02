@@ -1,5 +1,7 @@
 package com.axitiy.domain.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.axitiy.application.ports.input.CreateConciliationUseCase;
 import com.axitiy.application.ports.input.GetConciliationUseCase;
 import com.axitiy.application.ports.output.ConciliationOutputPort;
@@ -11,8 +13,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ConciliationService implements CreateConciliationUseCase, GetConciliationUseCase{
-
-    private final ConciliationOutputPort conciliationOutputPort = null;
+	
+	@Autowired
+    ConciliationOutputPort conciliationOutputPort;
     
     public ConciliationService(ConciliationPersistenceAdapter conciliationPersistenceAdapter) {
 		// TODO Auto-generated constructor stub

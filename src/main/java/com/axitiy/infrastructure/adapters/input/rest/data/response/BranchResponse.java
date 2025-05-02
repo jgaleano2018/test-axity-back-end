@@ -8,11 +8,11 @@ public class BranchResponse {
 
     private String snomsucax;
     
-    public BranchResponse(int sidsucax, String scodsucax, String snomsucax) {
+    /*public BranchResponse(int sidsucax, String scodsucax, String snomsucax) {
         this.sidsucax = sidsucax;
         this.scodsucax = scodsucax;
         this.snomsucax = snomsucax;
-    }
+    }*/
 
     public int getId_Branch() {
         return sidsucax;

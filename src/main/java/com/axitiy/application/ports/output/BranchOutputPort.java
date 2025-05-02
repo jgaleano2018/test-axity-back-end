@@ -1,13 +1,11 @@
 package com.axitiy.application.ports.output;
 
-import java.util.Optional;
+import java.util.List;
 
 import com.axitiy.domain.model.Branch;
 
 public interface BranchOutputPort {
     
-	Branch saveBranch(Branch branch);
-    
-    Optional<Branch> getBranchById(Long id);
+    List<Branch> getAll();
     
 }

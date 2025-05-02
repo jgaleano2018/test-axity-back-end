@@ -1,30 +1,19 @@
-package com.axitiy.domain.model;
+package com.axitiy.infrastructure.adapters.input.rest.data.request;
 
-public class BranchProduct {
+import jakarta.validation.constraints.NotEmpty;
 
-    private int scid;
-
+public class BranchProductRequest {
+	
+	@NotEmpty(message = "Conciliation Date may not be empty")
     private int scidsucax;
 
+	@NotEmpty(message = "Product may not be empty")
     private int scidprax;
     
+	@NotEmpty(message = "Document may not be empty")
     private int sciddoax;
     
     
-    /*public BranchProduct(int scidsucax, int scidprax, int sciddoax) {
-        this.scidsucax = scidsucax;
-        this.scidprax = scidprax;
-        this.sciddoax = sciddoax;
-    }*/
-
-    public int getId_BranchProduct() {
-        return scid;
-    }
-    
-    public void setId_BranchProduct(int scid) {
-        this.scid = scid;
-    }
-
     public int getScidsucax() {
         return scidsucax;
     }
@@ -48,5 +37,6 @@ public class BranchProduct {
     public void setSciddoax(int sciddoax) {
         this.sciddoax = sciddoax;
     }
+
 
 }

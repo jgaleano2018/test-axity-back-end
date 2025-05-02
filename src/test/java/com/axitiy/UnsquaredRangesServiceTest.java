@@ -18,6 +18,7 @@ import static org.mockito.BDDMockito.given;
 
 import com.axitiy.domain.model.Conciliation;
 import com.axitiy.domain.model.UnsquaredRanges;
+import com.axitiy.domain.model.UnsquaredRangesReport;
 import com.axitiy.domain.service.BranchProductService;
 import com.axitiy.domain.service.ConciliationService;
 import com.axitiy.domain.service.UnsquaredRangesService;
@@ -75,35 +76,52 @@ public class UnsquaredRangesServiceTest {
 
     @BeforeEach
     public void setup(){
-        //employeeRepository = Mockito.mock(EmployeeRepository.class);
-        //employeeService = new EmployeeServiceImpl(employeeRepository);
-    	
-    	
-    	//ConciliationEntity(Date afearax, int asidsucax, int apidprax, int adiddoax, double adifax, double asfarax, String aresax)
-    	//UnsquaredRangesEntity(String danoax, String dmesax, String dconax, int dsidsucax, int dpidprax, int ddiddoax, Date dfearax, Double ddifax, Double dsfarax, String dresax) {
-    	
-    	
+        
     	this.monthConciliationRequest = "01";    	
     	this.yearConciliationRequest = "2025";    	
     	Date dateConciliationTest = new Date();
     	
-    	ConciliationEntity conciliationEntity = new ConciliationEntity(dateConciliationTest, 1, 1, 1, 0.00, 3081673400.00, "C");
-    	
     	this.conciliationEntityList = new ArrayList<ConciliationEntity>();
+    	ConciliationEntity conciliationEntity = new ConciliationEntity();
     	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(1);
+    	conciliationEntity.setApidprax(1);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(0.00);
+    	conciliationEntity.setAsfarax(3081673400.00);
+    	conciliationEntity.setAresax("C");
     	conciliationEntityList.add(conciliationEntity);
     	
-    	conciliationEntity = new ConciliationEntity(dateConciliationTest, 1, 2, 1, 0.00, 691624500.00, "C");
-    	
+    	conciliationEntity = new ConciliationEntity();    	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(1);
+    	conciliationEntity.setApidprax(2);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(0.00);
+    	conciliationEntity.setAsfarax(691624500.00);
+    	conciliationEntity.setAresax("C");    	
     	conciliationEntityList.add(conciliationEntity);
     	
-    	conciliationEntity = new ConciliationEntity(dateConciliationTest, 1, 3, 1, 19.50, 2976795600.00, "D");
-    	
+    	conciliationEntity = new ConciliationEntity();    	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(1);
+    	conciliationEntity.setApidprax(3);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(0.00);
+    	conciliationEntity.setAsfarax(2976795600.00);
+    	conciliationEntity.setAresax("D");
     	conciliationEntityList.add(conciliationEntity);
-
-    	conciliationEntity = new ConciliationEntity(dateConciliationTest, 2, 1, 1, 55.00, 422793679, "B");
     	
-    	conciliationEntityList.add(conciliationEntity);
+    	conciliationEntity = new ConciliationEntity();    	
+    	conciliationEntity.setAfearax(dateConciliationTest);
+    	conciliationEntity.setAsidsucax(2);
+    	conciliationEntity.setApidprax(1);
+    	conciliationEntity.setAdiddoax(1);
+    	conciliationEntity.setAdifax(55.00);
+    	conciliationEntity.setAsfarax(422793679);
+    	conciliationEntity.setAresax("B");
+    	conciliationEntityList.add(conciliationEntity);    	
     	
     	
     	// Get day from date
@@ -112,9 +130,17 @@ public class UnsquaredRangesServiceTest {
     	String dayActuallyStr = Integer.toString(dayActually).length() == 1 ? '0'+Integer.toString(dayActually) : Integer.toString(dayActually);
     	
     	
-        this.unsquaredRangesEntity = new UnsquaredRangesEntity(yearConciliationRequest, monthConciliationRequest, dayActuallyStr, 1, 3, 1, dateConciliationTest, 19.50, 2976795600.00, "D");
-        
-        this.unsquaredRangesEntity.setId_Conciliation(1);
+    	unsquaredRangesEntity = new UnsquaredRangesEntity();
+    	unsquaredRangesEntity.setDanoax(yearConciliationRequest);
+    	unsquaredRangesEntity.setDmesax(monthConciliationRequest);
+    	unsquaredRangesEntity.setDconax(dayActuallyStr);
+    	unsquaredRangesEntity.setDfearax(dateConciliationTest);
+    	unsquaredRangesEntity.setDsidsucax(1);
+    	unsquaredRangesEntity.setDpidprax(3);
+    	unsquaredRangesEntity.setDdifax(19.50);
+    	unsquaredRangesEntity.setDsfarax(2976795600.00);
+    	unsquaredRangesEntity.setDresax("D");
+        unsquaredRangesEntity.setId_Conciliation(1);
         
         this.branchProductEntity = new BranchProductEntity(1, 1, 1);
 
@@ -124,24 +150,16 @@ public class UnsquaredRangesServiceTest {
     @DisplayName("JUnit test for conciliation method")
     @Test
     public void givenConcliliationObject_whenSaveConciliation_thenReturnConciliationObject(){
-        // given - precondition or setup
-        /*given(employeeRepository.findByEmail(employee.getEmail()))
-                .willReturn(Optional.empty());*/
-    	
+       
     	List<Conciliation> listConciliation = conciliationMapper.toListConciliation(conciliationEntityList);
 
         given(conciliationRepository.save(conciliationEntityList.get(0))).willReturn(conciliationEntity);
         
         given(conciliationService.createConciliation(listConciliation.get(0))).willReturn(conciliation);
 
-        //System.out.println(employeeRepository);
-        //System.out.println(employeeService);
-
         // when -  action or the behaviour that we are going test
-        //Employee savedEmployee = employeeService.saveEmployee(employee);
         Conciliation conciliation2 = conciliationMapper.toConciliation(conciliationEntity);
 
-        //System.out.println(savedEmployee);
         // then - verify the output
         assertThat(conciliation).isNotNull();
         assertThat(conciliation2).isNotNull();
@@ -152,7 +170,6 @@ public class UnsquaredRangesServiceTest {
     @DisplayName("JUnit test for unsquared ranges method")
     @Test
     public void givenUnsquaredRangesObject_whenSaveUnsquaredRanges_thenReturnUnsquaredRangesObject(){
-    	
     	
         UnsquaredRanges unsquaredRanges = unsquaredRangesMapper.toUnsquaredRanges(unsquaredRangesEntity);
     	
@@ -174,7 +191,6 @@ public class UnsquaredRangesServiceTest {
     @DisplayName("JUnit test for branch product method")
     @Test
     public void givenBranchProductObject_whenSaveBranchProduct_thenReturnBranchProductObject(){
-    	
     	
     	com.axitiy.domain.model.BranchProduct branchProduct = branchProductMapper.toBranchProduct(branchProductEntity);
     	
@@ -208,16 +224,23 @@ public class UnsquaredRangesServiceTest {
 	    int dayActually = currentDate.getDayOfMonth();
     	String dayActuallyStr = Integer.toString(dayActually).length() == 1 ? '0'+Integer.toString(dayActually) : Integer.toString(dayActually);
     	
-    	UnsquaredRangesEntity unsquaredRangesEntity2 = new UnsquaredRangesEntity(yearConciliationRequest, monthConciliationRequest, dayActuallyStr, 1, 3, 1, dateConciliationTest, 19.50, 2976795600.00, "D");
-        
+    	UnsquaredRangesEntity unsquaredRangesEntity2 = new UnsquaredRangesEntity();
+    	unsquaredRangesEntity2.setDanoax(yearConciliationRequest);
+    	unsquaredRangesEntity2.setDmesax(monthConciliationRequest);
+    	unsquaredRangesEntity2.setDconax(dayActuallyStr);
+    	unsquaredRangesEntity2.setDfearax(dateConciliationTest);
+    	unsquaredRangesEntity2.setDsidsucax(1);
+    	unsquaredRangesEntity2.setDpidprax(3);
+    	unsquaredRangesEntity2.setDdifax(19.50);
+    	unsquaredRangesEntity2.setDsfarax(2976795600.00);
+    	unsquaredRangesEntity2.setDresax("D");
         unsquaredRangesEntity2.setId_Conciliation(2);
         
         given(unsquaredRangesRepository.findAll()).willReturn(List.of(unsquaredRangesEntity,unsquaredRangesEntity2));
         
         
-
         // when -  action or the behaviour that we are going test
-        List<UnsquaredRanges> unsquaredRangesList = this.unsquaredRangesService.getUnsquaredRangesByFilters(dateConciliationTest, 1, 1);
+        List<UnsquaredRangesReport> unsquaredRangesList = this.unsquaredRangesService.getUnsquaredRangesByFilters("2025", "04", "30", 1, 1);
 
         // then - verify the output
         assertThat(unsquaredRangesList).isNotNull();
