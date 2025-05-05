@@ -71,6 +71,11 @@ public class ConciliationRestAdapter {
 	    	for (ConciliationRequest conciliationRequestItem : conciliationToCreate) {
 	    		
 	    		regsConciliation = 0;
+	    		Calendar c = Calendar.getInstance();
+	    		c.setTime(conciliationRequestItem.getAfearax()); // Using today's date
+	    		c.add(Calendar.DATE, 1); // Adding 5 days
+	    		
+	    		conciliationRequestItem.setAfearax(c.getTime());
 	
 	    		Conciliation conciliation = mapper.map(conciliationRequestItem, Conciliation.class);	    		
 	    		conciliation = createConciliationUseCase.createConciliation(conciliation);
@@ -86,9 +91,7 @@ public class ConciliationRestAdapter {
 	        		
 	    			//Insert register in the table: branch_product
 	    			
-	    			// Request to domain
-	            	//BranchProduct branchProduct = new BranchProduct(conciliation.getAsidsucax(), conciliation.getApidprax(), conciliation.getAdiddoax());
-	            	
+	    			// Request to domain	            	
 	            	BranchProduct branchProduct = new BranchProduct();
 	            	
 	            	branchProduct.setScidsucax(conciliation.getAsidsucax());
